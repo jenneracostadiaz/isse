@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Project;
 use App\Models\Quote;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +23,8 @@ class QuoteFactory extends Factory
             'content' => $this->faker->text(),
             'amount' => $this->faker->randomFloat(2, 0, 1000),
             'status' => $this->faker->randomElement([Quote::PENDING, Quote::REVIEWING, Quote::APPROVED, Quote::IN_PROGRESS, Quote::COMPLETED]),
+            'project_id' => Project::factory(),
+            'company_id' => Company::factory(),
         ];
     }
 }

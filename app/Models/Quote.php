@@ -17,5 +17,15 @@ class Quote extends Model
     const APPROVED = 3;
     const IN_PROGRESS = 4;
     const COMPLETED = 5;
+
+    //Relationship one to many (inverse)
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+    
     
 }

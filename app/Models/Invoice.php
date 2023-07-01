@@ -17,4 +17,13 @@ class Invoice extends Model
     const PAID = 3;
     const UNPAID = 4;
 
+    //Relationship one to many (inverse)
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+
 }

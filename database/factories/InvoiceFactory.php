@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use App\Models\Invoice;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +25,8 @@ class InvoiceFactory extends Factory
             'status' => $this->faker->randomElement([Invoice::PENDING, Invoice::GENERATED, Invoice::PAID, Invoice::UNPAID]),
             'xml' => $this->faker->imageUrl(640, 480, 'xml'),
             'pdf' => $this->faker->imageUrl(640, 480, 'pdf'),
+            'project_id' => Project::factory(),
+            'company_id' => Company::factory(),
         ];
     }
 }

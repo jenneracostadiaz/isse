@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('xml')->nullable();
             $table->string('pdf')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('company_id');
+
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

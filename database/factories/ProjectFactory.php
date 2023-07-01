@@ -35,8 +35,6 @@ class ProjectFactory extends Factory
             'slug' => Str::slug($title),
             'company_id' => Company::all()->random()->id,
             'user_id' => User::all()->random()->id,
-            'invoice_id' => Invoice::all()->random()->id,
-            'quote_id' => Quote::all()->random()->id,
         ];
     }
 }
