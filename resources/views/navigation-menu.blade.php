@@ -12,8 +12,8 @@
         ],
         [
             'name' => 'Quotes',
-            'route' => '#',
-            'active' => false,
+            'route' => route('quotes.index'),
+            'active' => request()->routeIs('quotes.*'),
         ],
         [
             'name' => 'Invoices',

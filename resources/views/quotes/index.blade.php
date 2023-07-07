@@ -9,15 +9,8 @@
                 </div>
             </div>
             <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
-                @foreach ($projects as $project)
-                    <x-card-project :project="$project" />
-                @endforeach
+                
             </div>
-            <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25  p-6 lg:p-8">
-                {{ $projects->links() }}
-            </div>
-
-
         </div>
     </div>
 </x-app-layout>

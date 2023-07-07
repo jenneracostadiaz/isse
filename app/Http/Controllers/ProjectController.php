@@ -12,9 +12,10 @@ class ProjectController extends Controller
         
         $projects = Project::where('user_id', auth()->user()->id)
             ->orderByRaw('FIELD(status, 4, 2, 1, 5, 3)')
-            ->get();
+            ->paginate(12, ['*'], 'projects');
 
         return view('projects.index', compact('projects'));
+        // return $projects;
 
     }
 
