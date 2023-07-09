@@ -43,7 +43,7 @@
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Download</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Action</th>
+                                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -55,7 +55,11 @@
                                                             <label for="hs-table-pagination-checkbox-1" class="sr-only">Checkbox</label>
                                                         </div>
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200"> {{ $invoice->id }} </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                                                        <a href=" # " class="text-blue-600 hover:text-blue-900">
+                                                            {{ $invoice->id }} 
+                                                        </a>
+                                                    </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> {{ $invoice->company->name }} </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> 
                                                         {{-- Limitar el tamañ del titulo a 20 caracteres --}}
@@ -71,8 +75,21 @@
                                                         <a href="{{ $invoice->pdf }}" class="text-gray-400 hover:text-gray-200 @if ($invoice->pdf == null) opacity-50 @endif" target="_blank">PDF</a> |
                                                         <a href="{{ $invoice->xml }}" class="text-gray-400 hover:text-gray-200 @if ($invoice->xml == null) opacity-50 @endif" target="_blank">XML</a> </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <x-status-invoice :status="$invoice->status" /> </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
+                                                        <a href="#">
+                                                            <svg class="fill-gray-200 hover:fill-gray-50" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M9.08438 5.20312L2.50313 11.7844C2.33438 11.9531 2.25 12.1219 2.25 12.375V14.9062C2.25 15.4125 2.5875 15.75 3.09375 15.75H5.625C5.87813 15.75 6.04687 15.6656 6.21562 15.4969L12.7969 8.91563L9.08438 5.20312Z"/>
+                                                                <path d="M15.4969 5.03437L12.9656 2.50313C12.6281 2.16563 12.1219 2.16563 11.7844 2.50313L10.2656 4.02187L13.9781 7.73438L15.4969 6.21562C15.8344 5.87812 15.8344 5.37187 15.4969 5.03437Z"/>
+                                                            </svg>                                                                
+                                                        </a>
+                                                        <span class="text-gray-600 mx-2"> | </span>
+                                                        <a href="#">
+                                                            <svg class="fill-red-500 hover:fill-red-700" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.9375 14.0625V6.75H14.0625V14.0625C14.0625 14.9945 13.307 15.75 12.375 15.75H5.625C4.69302 15.75 3.9375 14.9945 3.9375 14.0625ZM6.1875 12.9375H7.3125V9H6.1875V12.9375ZM9.5625 12.9375H8.4375V9H9.5625V12.9375ZM10.6875 12.9375H11.8125V9H10.6875V12.9375Z"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8125 4.5H15.1875C15.4982 4.5 15.75 4.75184 15.75 5.0625C15.75 5.37316 15.4982 5.625 15.1875 5.625H2.8125C2.50184 5.625 2.25 5.37316 2.25 5.0625C2.25 4.75184 2.50184 4.5 2.8125 4.5H6.1875V2.8125C6.1875 2.50184 6.43934 2.25 6.75 2.25H11.25C11.5607 2.25 11.8125 2.50184 11.8125 2.8125V4.5ZM10.6875 3.375H7.3125V4.5H10.6875V3.375Z"/>
+                                                            </svg>
+                                                        </a>
+
                                                     </td>
                                                 </tr>
                                             @endforeach
