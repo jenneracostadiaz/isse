@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuoteController;
 
@@ -29,5 +30,6 @@ Route::middleware([
 
     Route::resource('projects', ProjectController::class);
     Route::resource('quotes', QuoteController::class);
+    Route::resource('invoices', InvoiceController::class);
 
 });

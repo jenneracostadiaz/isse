@@ -17,8 +17,8 @@
         ],
         [
             'name' => 'Invoices',
-            'route' => '#',
-            'active' => false,
+            'route' => route('invoices.index'),
+            'active' => request()->routeIs('invoices.*'),
         ],
         [
             'name' => 'Companies',

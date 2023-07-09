@@ -19,12 +19,15 @@ class QuoteFactory extends Factory
      */
     public function definition(): array
     {
+        $project = Project::all()->random();
+        $company = Company::all()->random();
+
         return [
             'content' => $this->faker->text(),
             'amount' => $this->faker->randomFloat(2, 0, 1000),
             'status' => $this->faker->randomElement([Quote::PENDING, Quote::REVIEWING, Quote::APPROVED, Quote::IN_PROGRESS, Quote::COMPLETED]),
-            'project_id' => Project::factory(),
-            'company_id' => Company::factory(),
+            'project_id' => $project->id,
+            'company_id' => $company->id,
         ];
     }
 }
