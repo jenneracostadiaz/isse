@@ -14,7 +14,12 @@
                         <div class="p-1.5 min-w-full inline-block align-middle">
                             <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
                                 {{-- Table header --}}
-                                <div class="py-3 px-4">
+                                <div class="py-3 px-4 flex items-center justify-between">
+                                    <div class="relative">
+                                        <p class="text-gray-400">
+                                            Consulta de facturas / recibos de pago de las Empresas Asociadas a tu cuenta.
+                                        </p>
+                                    </div>
                                     <div class="relative max-w-xs">
                                         <label for="hs-table-with-pagination-search" class="sr-only">Search</label>
                                         <input type="text" name="hs-table-with-pagination-search" id="hs-table-with-pagination-search" class="p-3 pl-10 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Search for items">
@@ -36,12 +41,11 @@
                                                         <label for="hs-table-pagination-checkbox-all" class="sr-only">Checkbox</label>
                                                     </div>
                                                 </th>
-                                                {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"></th> --}}
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Company</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
-                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Download</th>
+                                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Download</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Action</th>
                                             </tr>
@@ -57,7 +61,13 @@
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                         <a href=" # " class="text-blue-600 hover:text-blue-900">
-                                                            {{ $invoice->id }} 
+                                                            @if ($invoice->id < 10)
+                                                                00{{ $invoice->id }}
+                                                            @elseif ($invoice->id < 100)
+                                                                0{{ $invoice->id }}
+                                                            @else
+                                                                {{ $invoice->id }}
+                                                            @endif
                                                         </a>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> {{ $invoice->company->name }} </td>
@@ -71,9 +81,19 @@
                                                         
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> S/ {{ $invoice->amount }} </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-500">
-                                                        <a href="{{ $invoice->pdf }}" class="text-gray-400 hover:text-gray-200 @if ($invoice->pdf == null) opacity-50 @endif" target="_blank">PDF</a> |
-                                                        <a href="{{ $invoice->xml }}" class="text-gray-400 hover:text-gray-200 @if ($invoice->xml == null) opacity-50 @endif" target="_blank">XML</a> </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-500 flex justify-center items-center">
+                                                        <a href="{{ $invoice->pdf }}" class="@if ($invoice->pdf == null) opacity-50 @endif" target="_blank">
+                                                            <svg class="fill-gray-200 hover:fill-white" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M28.5 4.5H7.5C5.85 4.5 4.5 5.85 4.5 7.5V28.5C4.5 30.15 5.85 31.5 7.5 31.5H28.5C30.15 31.5 31.5 30.15 31.5 28.5V7.5C31.5 5.85 30.15 4.5 28.5 4.5ZM14.25 17.25C14.25 18.45 13.2 19.5 12 19.5H10.5V22.5H8.25V13.5H12C13.2 13.5 14.25 14.55 14.25 15.75V17.25ZM21.75 20.25C21.75 21.45 20.7 22.5 19.5 22.5H15.75V13.5H19.5C20.7 13.5 21.75 14.55 21.75 15.75V20.25ZM27.75 15.75H25.5V17.25H27.75V19.5H25.5V22.5H23.25V13.5H27.75V15.75ZM18 15.75H19.5V20.25H18V15.75ZM10.5 15.75H12V17.25H10.5V15.75Z" />
+                                                            </svg>                                                                
+                                                        </a>
+                                                        <span class="text-gray-600 mx-2"> | </span>
+                                                        <a href="{{ $invoice->xml }}" class="@if ($invoice->xml == null) opacity-50 @endif" target="_blank">
+                                                            <svg class="fill-gray-200 hover:fill-white" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M28.5 4.5H7.5C5.835 4.5 4.5 5.835 4.5 7.5V28.5C4.5 30.165 5.835 31.5 7.5 31.5H28.5C30.165 31.5 31.5 30.165 31.5 28.5V7.5C31.5 5.835 30.165 4.5 28.5 4.5ZM12 22.5H9.75L9 19.5L8.25 22.5H6L7.125 18L6 13.5H8.25L9 16.5L9.75 13.5H12L10.875 18L12 22.5ZM23.25 22.5H21V15.75H19.5V21H17.25V15.75H15.75V22.5H13.5V16.5C13.5 14.85 14.85 13.5 16.5 13.5H20.25C21.0456 13.5 21.8087 13.8161 22.3713 14.3787C22.9339 14.9413 23.25 15.7044 23.25 16.5V22.5ZM30 22.5H25.5V13.5H27.75V20.25H30V22.5Z" />
+                                                            </svg>                                                                
+                                                        </a>
+                                                    </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <x-status-invoice :status="$invoice->status" /> </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center">
                                                         <a href="#">
