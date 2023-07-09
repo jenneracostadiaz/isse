@@ -10,7 +10,7 @@
             </div>
             <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25  p-6 lg:p-8">
                 <div class="flex flex-col">
-                    <div class="-m-1.5 overflow-x-auto">
+                    <div class="p-m-1.5 overflow-x-auto">
                         <div class="p-1.5 min-w-full inline-block align-middle">
                             <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
                                 {{-- Table header --}}
@@ -35,12 +35,12 @@
                                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                         <thead class="bg-gray-50 dark:bg-gray-700">
                                             <tr>
-                                                <th scope="col" class="py-3 px-4 pr-0">
+                                                {{-- <th scope="col" class="py-3 px-4 pr-0">
                                                     <div class="flex items-center h-5">
                                                         <input id="hs-table-pagination-checkbox-all" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                         <label for="hs-table-pagination-checkbox-all" class="sr-only">Checkbox</label>
                                                     </div>
-                                                </th>
+                                                </th> --}}
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Company</th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
@@ -53,12 +53,12 @@
                                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                             @foreach ($invoices as $key => $invoice)
                                                 <tr>
-                                                    <td class="py-3 pl-4">
+                                                    {{-- <td class="py-3 pl-4">
                                                         <div class="flex items-center h-5">
                                                             <input id="hs-table-pagination-checkbox-1" type="checkbox" class="border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
                                                             <label for="hs-table-pagination-checkbox-1" class="sr-only">Checkbox</label>
                                                         </div>
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                         <a href=" # " class="text-blue-600 hover:text-blue-900">
                                                             @if ($invoice->id < 10)
@@ -72,13 +72,11 @@
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> {{ $invoice->company->name }} </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> 
-                                                        {{-- Limitar el tamañ del titulo a 20 caracteres --}}
-                                                        @if (strlen($invoice->project->title) > 20)
-                                                            {{ substr($invoice->project->title, 0, 20) }}...
+                                                        @if (strlen($invoice->project->title) > 35)
+                                                            {{ substr($invoice->project->title, 0, 35) }}...
                                                         @else
                                                             {{ $invoice->project->title }}
                                                         @endif
-                                                        
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> S/ {{ $invoice->amount }} </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-500 flex justify-center items-center">
@@ -120,8 +118,6 @@
                                 <div class="py-1 px-4">
                                     {{$invoices->links()}}
                                 </div>
-
-
 
                             </div>
                         </div>

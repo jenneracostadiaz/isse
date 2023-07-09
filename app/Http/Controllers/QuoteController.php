@@ -6,35 +6,29 @@ use App\Models\Company;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 class QuoteController extends Controller
 {
     public function index(){
 
-        $typesStatus = [
-            '1' => 'PENDING',
-            '2' => 'REVIEWING',
-            '3' => 'APPROVED',
-            '4' => 'IN_PROGRESS',
-            '5' => 'COMPLETED',
-        ];
+        $companies = Company::where('user_id', auth()->user()->id)->get();
+        $companyIds = $companies->pluck('id');
 
-        $user_id = auth()->user()->id;
+        $statusOrder = ['4', '3', '1', '2', '5'];
 
-        $companies = Company::where('user_id', auth()->user()->id)
-            ->get();
+        $quotes = Quote::whereIn('company_id', $companyIds)
+            ->whereIn('status', $statusOrder)
+            ->with('project:id,title')
+            ->with('company:id,name')
+            // ->select('id', 'amount', 'status', 'xml', 'pdf', 'project_id', 'company_id')
+            ->orderByRaw("FIELD(status, '" . implode("','", $statusOrder) . "')")
+            ->paginate(15)
+        ;
 
-        $quotes = [];
-        foreach ($companies as $key => $company) {
-            if($company->quotes){
-                foreach ($company->quotes as $key => $quote) {
-                    $quotes[] = Quote::where('company_id', $company->id)
-                        ->where('id', $quote->id)
-                        ->first();
-                }
-            }
-        }
-
-        // return view('quotes.index');
-        return $quotes;
+        return view('quotes.index', compact('quotes'));
+        // return $quotes;
     }
 }

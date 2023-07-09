@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Invoice;
-use App\Models\Project;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Collection;
@@ -32,7 +31,6 @@ class InvoiceController extends Controller
             ->paginate(15)
         ;
 
-        // return view('invoices.index', ['invoices' => $invoices]);
         return view('invoices.index', compact('invoices'));
         // return $invoices;
     }
