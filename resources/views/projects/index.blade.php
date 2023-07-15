@@ -16,8 +16,6 @@
             <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25  p-6 lg:p-8">
                 {{ $projects->links() }}
             </div>
-
-
         </div>
     </div>
 </x-app-layout>

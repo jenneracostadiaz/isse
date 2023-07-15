@@ -32,7 +32,6 @@ class InvoiceController extends Controller
         ;
 
         return view('invoices.index', compact('invoices'));
-        // return $invoices;
     }
 
 
@@ -59,7 +58,12 @@ class InvoiceController extends Controller
      */
     public function show(string $id)
     {
-        return view('invoices.show');
+
+        $invoice = Invoice::find($id);
+        $invoice = $invoice->load('company:id,name', 'project:id,title');
+
+        // return $invoice;
+        return view('invoices.show', compact('invoice'));
     }
 
     /**
@@ -84,5 +88,24 @@ class InvoiceController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Download the specified resource from storage.
+     */
+    public function download(string $id, string $attachment)
+    {
+        $invoice = Invoice::find($id);
+
+        if ($attachment == 'xml') {
+            $file = $invoice->xml;
+        } else {
+            $file = $invoice->pdf;
+        }
+
+        $url = $file;
+        
+        //Abrir en nueva url
+        return redirect($url);
     }
 }

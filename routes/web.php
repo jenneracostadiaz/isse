@@ -31,5 +31,6 @@ Route::middleware([
     Route::resource('projects', ProjectController::class);
     Route::resource('quotes', QuoteController::class);
     Route::resource('invoices', InvoiceController::class);
+    Route::get('invoices/{invoice}/download/{attachment}', [InvoiceController::class, 'download'])->name('invoices.download');
 
 });

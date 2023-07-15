@@ -17,6 +17,11 @@
                                 <div class="py-3 px-4 flex items-center justify-between">
                                     <div class="relative">
                                         <p class="text-gray-400">
+                                            <a href=" {{ route('invoices.create') }} " class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Crear Factura</a>
+                                        </p>
+                                    </div>
+                                    <div class="relative">
+                                        <p class="text-gray-400">
                                             Consulta de facturas / recibos de pago de las Empresas Asociadas a tu cuenta.
                                         </p>
                                     </div>
@@ -29,6 +34,7 @@
                                             </svg>
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 {{-- Table --}}
                                 <div class="overflow-hidden">
@@ -60,7 +66,7 @@
                                                         </div>
                                                     </td> --}}
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                        <a href=" # " class="text-blue-600 hover:text-blue-900">
+                                                        <a href=" {{ route('invoices.show', $invoice->id) }} " class="text-blue-600 hover:text-blue-900">
                                                             @if ($invoice->id < 10)
                                                                 00{{ $invoice->id }}
                                                             @elseif ($invoice->id < 100)
